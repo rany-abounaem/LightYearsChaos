@@ -10,9 +10,12 @@ namespace LightYearsChaos
         private Dictionary<string, Skill> skills = new Dictionary<string, Skill>();
 
 
-        public void Setup()
+        public void Setup(List<Skill> skillsGiven)
         {
-
+            foreach (Skill skill in skillsGiven)
+            {
+                AddSkill(skill);
+            }
         }
 
 

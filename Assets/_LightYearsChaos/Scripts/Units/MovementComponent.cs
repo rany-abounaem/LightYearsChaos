@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace LightYearsChaos
 {
-    public class Movement : MonoBehaviour
+    public class MovementComponent : MonoBehaviour
     {
         private NavMeshAgent agent;
 

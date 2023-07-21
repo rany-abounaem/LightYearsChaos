@@ -32,7 +32,7 @@ namespace LightYearsChaos
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.TryGetComponent(out Unit unit))
+                if (hit.collider.TryGetComponent(out Unit unit) && unit.TeamId == 0)
                 {
                     currentSelection = unit;
                     unit.SelectionObject.SetActive(true);
@@ -66,6 +66,11 @@ namespace LightYearsChaos
                 if (hit.collider.TryGetComponent(out NavMeshSurface surface))
                 {
                     currentSelection.Movement.Move(hit.point);
+                }
+
+                if (hit.collider.TryGetComponent(out Unit unit) && unit.TeamId != currentSelection.TeamId)
+                {
+                    currentSelection.Attack(unit);
                 }
             }
         }
