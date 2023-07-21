@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -14,7 +15,7 @@ namespace LightYearsChaos
         {
             foreach (Skill skill in skillsGiven)
             {
-                AddSkill(skill);
+                AddSkill(Instantiate(skill));
             }
         }
 
@@ -33,6 +34,21 @@ namespace LightYearsChaos
                     skill.CurrentCooldown = skill.Cooldown;
                     skill.IsOnCooldown = false;
                 }
+
+                var weaponSkill = skill as WeaponSkill;
+                if (weaponSkill)
+                {
+                    if (weaponSkill.IsActive && weaponSkill.CurrentActiveDuration < weaponSkill.MaxActiveDuration)
+                    {
+                        weaponSkill.CurrentActiveDuration += delta;
+                    }
+                    else if (weaponSkill.IsActive && weaponSkill.CurrentActiveDuration >= weaponSkill.MaxActiveDuration)
+                    {
+                        weaponSkill.IsActive = false;
+                        weaponSkill.CurrentActiveDuration = 0;
+                    }
+                    
+                }
             }
         }
 
@@ -43,15 +59,17 @@ namespace LightYearsChaos
         }
 
 
-        public void RemoveSkill(Skill skill)
-        {
-            skills.Remove(skill.name);
-        }
-
-
         public void CastSkill(string name, Unit target = null)
         {
             skills[name].Cast(target);
+        }
+
+        public void CastSkill(int index, Unit target = null)
+        {
+            if (index < skills.Count)
+            {
+                skills.ElementAt(index).Value.Cast(target);
+            }
         }
     }
 }

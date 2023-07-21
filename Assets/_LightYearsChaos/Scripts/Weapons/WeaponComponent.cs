@@ -8,27 +8,32 @@ namespace LightYearsChaos
     public class WeaponComponent : MonoBehaviour
     {
         private List<Weapon> weapons = new List<Weapon>();
+        private SkillComponent skill;
+
+        public List<Weapon> Weapons { get {  return weapons; } }
 
 
-        public void Setup(List<Weapon> weaponsGiven)
+        public void Setup(List<Weapon> weaponsGiven, SkillComponent skill)
         {
             foreach (var weapon in weaponsGiven)
             {
-                Equip(weapon);
+                this.skill = skill;
+                var weaponInstance = Instantiate(weapon);
+                Equip(weaponInstance);
+
             }
         }
 
 
         public void Equip(Weapon weapon)
         {
-            var unitSkillComponent = GetComponent<Unit>().Skill;
-
-            weapons.Add(weapon);
-
             if (weapon.RequiresSkill)
             {
-                unitSkillComponent.AddSkill(weapon.Skill);
+                var skillInstance = Instantiate(weapon.Skill);
+                weapon.Skill = skillInstance;
+                skill.AddSkill(skillInstance);
             }
+            weapons.Add(weapon);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,15 +12,15 @@ namespace LightYearsChaos
         [SerializeField] private float maxCameraHeight;
         [SerializeField] private float scrollSpeed;
         [SerializeField] private float panSpeed;
-        private float initialHeight;
         private Vector2 panValue;
+
+        public event Action OnCameraUpdate;
 
 
         public void Setup(InputManager input)
         {
             input.OnCameraZoom += UpdateCameraZoom;
             input.OnCameraPan += PanCamera;
-            initialHeight = transform.position.y ;
         }
 
         
@@ -31,6 +32,8 @@ namespace LightYearsChaos
             }
 
             transform.Translate(new Vector3(0, 0, scrollSpeed * Time.deltaTime * scrollDir));
+
+            OnCameraUpdate?.Invoke();
         }
 
 
@@ -72,6 +75,8 @@ namespace LightYearsChaos
 
                 var dir = Vector3.ProjectOnPlane(transform.up, Vector3.up);
                 transform.Translate(dir * panSpeed * panValue.y * Time.deltaTime, Space.World);
+
+                OnCameraUpdate?.Invoke();
             }
         }
     }

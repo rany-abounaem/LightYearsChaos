@@ -10,12 +10,12 @@ namespace LightYearsChaos
         [SerializeField] private CameraManager cameraManager;
 
         private InputManager input;
-        private UnitController unitController;
+        private PlayerController unitController;
 
         private void Awake()
         {
             input = new InputManager();
-            unitController = new UnitController(input);
+            unitController = new PlayerController(input);
             cameraManager.Setup(input);
         }
     }
