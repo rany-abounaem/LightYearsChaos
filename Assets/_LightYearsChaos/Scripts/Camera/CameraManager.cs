@@ -7,11 +7,11 @@ namespace LightYearsChaos
 {
     public class CameraManager : MonoBehaviour
     {
-        [SerializeField] private float minZoom;
-        [SerializeField] private float maxZoom;
+        [SerializeField] private float minCameraHeight;
+        [SerializeField] private float maxCameraHeight;
         [SerializeField] private float scrollSpeed;
         [SerializeField] private float panSpeed;
-        private float initialZoom;
+        private float initialHeight;
         private Vector2 panValue;
 
 
@@ -19,21 +19,18 @@ namespace LightYearsChaos
         {
             input.OnCameraZoom += UpdateCameraZoom;
             input.OnCameraPan += PanCamera;
-            initialZoom = transform.localPosition.z;
-            Debug.Log(initialZoom);
+            initialHeight = transform.position.y ;
         }
 
         
         private void UpdateCameraZoom(int scrollDir)
         {
-            if ((scrollDir < 0 && transform.localPosition.z <= initialZoom - minZoom) || (scrollDir > 0 && transform.localPosition.z >= initialZoom + maxZoom))
+            if ((scrollDir > 0 && transform.position.y  <= minCameraHeight) || (scrollDir < 0 && transform.position.y >=  maxCameraHeight))
             {
                 return;
             }
-            Debug.Log("Z before zooming: " + transform.localPosition.z);
+
             transform.Translate(new Vector3(0, 0, scrollSpeed * Time.deltaTime * scrollDir));
-            Debug.Log("Zoom value: " + scrollSpeed * Time.deltaTime * scrollDir);
-            Debug.Log("Z after zooming: " + transform.localPosition.z);
         }
 
 

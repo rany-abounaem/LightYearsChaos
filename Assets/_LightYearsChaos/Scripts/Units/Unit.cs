@@ -9,10 +9,13 @@ namespace LightYearsChaos
     {
         private NavMeshAgent agent;
         private Movement movement;
+        private SkillComponent skill;
         private int teamId;
+
         [SerializeField] private GameObject selectionObject;
 
         public Movement Movement { get { return movement; } }
+        public SkillComponent Skill { get { return skill; } }
         public int TeamId { get { return teamId; } }
         public GameObject SelectionObject { get {  return selectionObject; } }
 

@@ -322,8 +322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64924c7494675649a073d922ebfa1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minZoom: 2
-  maxZoom: 2
+  minCameraHeight: 2
+  maxCameraHeight: 10
   scrollSpeed: 100
   panSpeed: 20
 --- !u!1 &1372354032
