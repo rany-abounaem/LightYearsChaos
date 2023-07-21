@@ -7,14 +7,19 @@ namespace LightYearsChaos
 {
     public class AggroState : UnitState
     {
-        public AggroState(Unit unit, UnitStateManager stateManager) : base(unit, stateManager)
-        {
+        private Unit target;
 
+        public Unit Target { get { return target; } set { target = value; } }
+
+
+        public AggroState(Unit unit, UnitStateManager stateManager, Unit target) : base(unit, stateManager)
+        {
+            this.target = target;
         }
+
 
         public override void Enter()
         {
-            Debug.Log("Entered Aggro State");
             base.Enter();
         }
 

@@ -13,9 +13,9 @@ namespace LightYearsChaos
 
         }
 
+
         public override void Enter()
         {
-            Debug.Log("Entered Idle State");
             base.Enter();
             unit.Sensor.OnEnemyDetected += HandleEnemyDetected;
         }
@@ -34,13 +34,13 @@ namespace LightYearsChaos
         }
 
 
-        private void HandleEnemyDetected(Unit unit)
+        private void HandleEnemyDetected(Unit enemy)
         {
             var aggroState = stateManager.GetExistingState<AggroState>();
 
             if (aggroState == null)
             {
-                aggroState = new AggroState(unit, stateManager);
+                aggroState = new AggroState(unit, stateManager, enemy);
             }
 
             stateManager.SetState(aggroState);

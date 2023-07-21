@@ -42,6 +42,7 @@ namespace LightYearsChaos
 
         public void SetState(UnitState state)
         {
+            Debug.Log(state.GetType());
             if (currentState != null)
             {
                 currentState.Exit();

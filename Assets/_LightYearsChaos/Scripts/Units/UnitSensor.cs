@@ -23,9 +23,8 @@ namespace LightYearsChaos
         }
 
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            Debug.Log(other.name);
             if (other.TryGetComponent(out Unit unit) && unit.TeamId != teamId)
             {
                 OnEnemyDetected?.Invoke(unit);

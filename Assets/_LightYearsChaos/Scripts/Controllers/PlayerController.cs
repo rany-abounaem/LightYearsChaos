@@ -1,4 +1,5 @@
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -65,7 +66,16 @@ namespace LightYearsChaos
             {
                 if (hit.collider.TryGetComponent(out NavMeshSurface surface))
                 {
-                    currentSelection.Movement.Move(hit.point);
+                    var movementState = currentSelection.StateManager.GetExistingState<MovementState>();
+                    if (movementState == null)
+                    {
+                        movementState = new MovementState(currentSelection, currentSelection.StateManager, hit.point);
+                    }
+                    else
+                    {
+                        ((MovementState)movementState).Destination = hit.point;
+                    }
+                    currentSelection.StateManager.SetState(movementState);
                 }
 
                 if (hit.collider.TryGetComponent(out Unit unit) && unit.TeamId != currentSelection.TeamId)
