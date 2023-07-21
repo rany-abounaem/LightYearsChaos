@@ -14,6 +14,7 @@ namespace LightYearsChaos
         // Medieval land
         Swordsman = 0,
         Pikeman,
+        Spearman,
         Archer,
         Magician,
         Priest,
@@ -47,6 +48,7 @@ namespace LightYearsChaos
     }
 
 
+    [Serializable]
     public class Unit : MonoBehaviour
     {
         private NavMeshAgent agent;
@@ -54,12 +56,14 @@ namespace LightYearsChaos
         private MovementComponent movement;
         private WeaponComponent weapon;
         private SkillComponent skill;
+        private UnitStateManager stateManager;
         
         [SerializeField] private int teamId;
         [SerializeField] private GameObject selectionObject;
         [SerializeField] private List<Skill> skillsGiven = new List<Skill>();
         [SerializeField] private List<Weapon> weaponsGiven = new List<Weapon>();
         [SerializeField] private UnitType type;
+        [SerializeField] private UnitSensor sensor;
 
         public NavMeshAgent Agent { get { return agent; } }
         public HealthComponent Health { get { return health; } }
@@ -69,6 +73,8 @@ namespace LightYearsChaos
         public int TeamId { get { return teamId; } }
         public GameObject SelectionObject { get {  return selectionObject; } }
         public UnitType Type { get { return type; } }
+        public UnitStateManager StateManager { get { return stateManager; } }
+        public UnitSensor Sensor { get {  return sensor; } }
 
 
         private void Awake()
@@ -86,7 +92,11 @@ namespace LightYearsChaos
 
             health = GetComponent<HealthComponent>();
             health.Setup(this);
-            
+
+            stateManager = GetComponent<UnitStateManager>();
+            stateManager.Setup(this, new IdleState(this, stateManager));
+
+            sensor.Setup(teamId, weapon.MaxFiringRange);
         }
 
 
@@ -94,9 +104,10 @@ namespace LightYearsChaos
         {
             var delta = Time.deltaTime;
 
-            Skill.Tick(delta);
-            Movement.Tick(delta);
-            Health.Tick(delta);
+            skill.Tick(delta);
+            movement.Tick(delta);
+            health.Tick(delta);
+            stateManager.Tick(delta);
         }
 
 

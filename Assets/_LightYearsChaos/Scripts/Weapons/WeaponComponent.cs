@@ -9,8 +9,10 @@ namespace LightYearsChaos
     {
         private List<Weapon> weapons = new List<Weapon>();
         private SkillComponent skill;
+        private float maxFiringRange = 0;
 
         public List<Weapon> Weapons { get {  return weapons; } }
+        public float MaxFiringRange { get { return maxFiringRange; } }
 
 
         public void Setup(List<Weapon> weaponsGiven, SkillComponent skill)
@@ -27,6 +29,11 @@ namespace LightYearsChaos
 
         public void Equip(Weapon weapon)
         {
+            if (weapon.FiringRange > maxFiringRange)
+            {
+                maxFiringRange = weapon.FiringRange;
+            }
+
             if (weapon.RequiresSkill)
             {
                 var skillInstance = Instantiate(weapon.Skill);
