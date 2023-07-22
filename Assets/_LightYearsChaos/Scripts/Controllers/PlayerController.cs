@@ -1,6 +1,7 @@
 using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 namespace LightYearsChaos
@@ -81,7 +82,7 @@ namespace LightYearsChaos
                         ((MovementState)movementState).Destination = hit.point;
                     }
 
-                    stateManager.SetState(movementState);
+                    stateManager.SetState((MovementState)movementState);
                 }
                 else if (hit.collider.TryGetComponent(out Unit unit) && unit.TeamId != currentSelection.TeamId)
                 {
@@ -89,18 +90,36 @@ namespace LightYearsChaos
                     if (stateManager.CurrentState is IdleState || stateManager.CurrentState is MovementState)
                     {
                         var closestPoint = currentSelection.Movement.GetClosestPoint(unit.transform.position, currentSelection.Weapon.MaxFiringRange);
-                        Debug.Log(closestPoint);
-                        var movementState = stateManager.GetExistingState<MovementState>();
-                        if (movementState == null)
+                        
+                        if (Vector3.Distance (currentSelection.transform.position, closestPoint) < 0.1f)
                         {
-                            movementState = new MovementState(currentSelection, stateManager, closestPoint);
+                            var rotationState = stateManager.GetExistingState<RotationState>();
+                            if (rotationState == null)
+                            {
+                                rotationState = new RotationState(currentSelection, stateManager, hit.transform.position);
+                            }
+                            else
+                            {
+                                ((RotationState)rotationState).Target = hit.transform.position;
+                            }
+
+                            stateManager.SetState(rotationState);
                         }
                         else
                         {
-                            ((MovementState)movementState).Destination = closestPoint;
-                        }
+                            var movementState = stateManager.GetExistingState<MovementState>();
+                            if (movementState == null)
+                            {
+                                movementState = new MovementState(currentSelection, stateManager, closestPoint);
+                            }
+                            else
+                            {
+                                ((MovementState)movementState).Destination = closestPoint;
+                            }
 
-                        stateManager.SetState(movementState);
+                            stateManager.SetState(movementState);
+                        }
+                        
                     }
                 }
             }

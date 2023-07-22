@@ -8,6 +8,7 @@ namespace LightYearsChaos
     public class HealthBar : MonoBehaviour
     {
         private bool isMoving;
+        private bool isRotating;
 
         [SerializeField] private List<SpriteRenderer> healthBars = new List<SpriteRenderer>();
 
@@ -15,6 +16,7 @@ namespace LightYearsChaos
         public void Setup(Unit unit)
         {
             unit.Movement.OnMovementUpdate += HandleMovement;
+            unit.Movement.OnRotationUpdate += HandleRotation;
             unit.Health.OnHealthUpdate += UpdateHealthBars;
 
             var camera = Camera.main.GetComponent<CameraManager>();
@@ -25,7 +27,7 @@ namespace LightYearsChaos
 
         public void Tick(float delta)
         {
-            if (isMoving) 
+            if (isMoving || isRotating) 
             {
                 UpdateTransform();
             }
@@ -54,7 +56,12 @@ namespace LightYearsChaos
 
         private void HandleMovement(bool state)
         {
-            isMoving = state;
+            isMoving = true;
+        }
+
+        private void HandleRotation(bool state)
+        {
+            isRotating = true;
         }
     }
 }

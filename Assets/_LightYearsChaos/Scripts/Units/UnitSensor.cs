@@ -19,7 +19,6 @@ namespace LightYearsChaos
 
             var boxCollider = GetComponent<BoxCollider>();
             boxCollider.size = new Vector3(boxSize, 1, boxSize);
-            boxCollider.center = new Vector3(0, 0, boxSize / 2 + 1);
         }
 
 

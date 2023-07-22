@@ -48,7 +48,7 @@ namespace LightYearsChaos
                 {
                     idleState = new IdleState(unit, stateManager);
                 }
-                stateManager.SetState(idleState);
+                stateManager.SetState((IdleState)idleState);
             }
         }
     }

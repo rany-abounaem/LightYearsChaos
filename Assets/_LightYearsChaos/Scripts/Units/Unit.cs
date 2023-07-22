@@ -96,7 +96,7 @@ namespace LightYearsChaos
             stateManager = GetComponent<UnitStateManager>();
             stateManager.Setup(this, new IdleState(this, stateManager));
 
-            sensor.Setup(teamId, weapon.MaxFiringRange);
+            sensor.Setup(teamId, weapon.MaxFiringRange * 2);
         }
 
 

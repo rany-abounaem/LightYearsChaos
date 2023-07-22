@@ -17,7 +17,7 @@ namespace LightYearsChaos
         public override void Enter()
         {
             base.Enter();
-            unit.Sensor.OnEnemyDetected += HandleEnemyDetected;
+            //unit.Sensor.OnEnemyDetected += HandleEnemyDetected;
         }
 
 
@@ -36,6 +36,7 @@ namespace LightYearsChaos
 
         private void HandleEnemyDetected(Unit enemy)
         {
+            Debug.Log("Enemy Detected");
             var aggroState = stateManager.GetExistingState<AggroState>();
 
             if (aggroState == null)

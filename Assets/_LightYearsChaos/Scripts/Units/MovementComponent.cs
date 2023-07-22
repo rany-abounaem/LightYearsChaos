@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 namespace LightYearsChaos
 {
@@ -10,8 +11,15 @@ namespace LightYearsChaos
     {
         private NavMeshAgent agent;
         private bool isMoving;
+        private bool isRotating;
+        private Quaternion fromRotation;
+        private Quaternion toRotation;
+        private float rotationTime;
+
+        [SerializeField] private float rotationSpeed;
 
         public event Action<bool> OnMovementUpdate;
+        public event Action<bool> OnRotationUpdate;
 
 
         public void Setup(NavMeshAgent agent)
@@ -28,14 +36,37 @@ namespace LightYearsChaos
                 isMoving = false;
                 OnMovementUpdate?.Invoke(false);
             }
+
+            if (isRotating)
+            {
+                transform.rotation = Quaternion.Slerp(fromRotation, toRotation, rotationTime);
+                rotationTime += delta * rotationSpeed;
+                
+                if (rotationTime >= 1)
+                {
+                    isRotating = false;
+                    OnRotationUpdate?.Invoke(isRotating);
+                }
+            }
         }
 
 
-        public void Move (Vector3 destination)
+        public void Move(Vector3 destination)
         {
             OnMovementUpdate?.Invoke(true);
             isMoving = true;
             agent.SetDestination(destination);
+        }
+
+
+        public void Rotate(Quaternion toRotation)
+        {
+            rotationTime = 0;
+            fromRotation = transform.rotation;
+            this.toRotation = toRotation;
+
+            isRotating = true;
+            OnRotationUpdate?.Invoke(isRotating);
         }
 
 
