@@ -62,16 +62,26 @@ namespace LightYearsChaos
         }
 
 
-        public void Rotate(Vector3 dest)
+        public void Rotate(Vector3 dest, bool instant = false)
         {
             var dir = (new Vector3(dest.x, 0, dest.z) - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
             var toRotation = Quaternion.LookRotation(dir);
-            rotationTime = 0;
-            fromRotation = transform.rotation;
-            this.toRotation = toRotation;
 
-            isRotating = true;
-            OnRotationUpdate?.Invoke(isRotating);
+            if (instant)
+            {
+                transform.rotation = toRotation;
+                OnRotationUpdate?.Invoke(false);
+            }
+            else
+            {
+                rotationTime = 0;
+                fromRotation = transform.rotation;
+                this.toRotation = toRotation;
+
+                isRotating = true;
+                OnRotationUpdate?.Invoke(isRotating);
+            }
+            
         }
 
 

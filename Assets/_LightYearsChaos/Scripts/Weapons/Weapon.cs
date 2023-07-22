@@ -15,6 +15,7 @@ namespace LightYearsChaos
         [SerializeField] private float fireRate;
         [SerializeField] private bool requiresSkill = false;
         [SerializeField] private Skill skill = null;
+        [SerializeField] private PooledObjectType projectileType;
 
         public float Damage { get { return damage; } }
         public float ProjectileSpeed { get { return projectileSpeed; } }

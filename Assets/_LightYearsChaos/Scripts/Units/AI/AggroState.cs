@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering;
 
 namespace LightYearsChaos
 {
@@ -22,13 +22,19 @@ namespace LightYearsChaos
         {
             base.Enter();
             unit.Movement.Rotate(target.transform.position);
-            target.Movement.OnMovementUpdate += HandleTargetMovement;
+            //target.Movement.OnMovementUpdate += HandleTargetMovement;
+            //unit.Sensor.Activate();
+            //unit.Sensor.H
         }
 
 
         public override void Update()
         {
             base.Update();
+            if (target.Agent.hasPath && !target.Agent.isStopped)
+            {
+                unit.Movement.Rotate(target.transform.position, true);
+            }
         }
 
 
@@ -38,13 +44,13 @@ namespace LightYearsChaos
         }
 
 
-        private void HandleTargetMovement(bool state)
-        {
-            if (!state)
-            {
-                unit.Movement.Rotate(target.transform.position);
-            }
-        }
+        //private void HandleTargetMovement(bool state)
+        //{
+        //    if (!state)
+        //    {
+        //        unit.Movement.Rotate(target.transform.position);
+        //    }
+        //}
     }
 }
 
