@@ -13,6 +13,8 @@ namespace LightYearsChaos
         private UnitState currentState;
         private List<UnitState> existingStates = new List<UnitState>();
 
+        public UnitState CurrentState { get { return currentState; } }
+
 
         public void Setup(Unit unit, UnitState state)
         {

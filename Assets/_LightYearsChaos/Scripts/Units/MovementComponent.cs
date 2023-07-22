@@ -37,6 +37,14 @@ namespace LightYearsChaos
             isMoving = true;
             agent.SetDestination(destination);
         }
+
+
+        public Vector3 GetClosestPoint(Vector3 targetPosition, float maxDistance)
+        {
+            var dir = (transform.position - targetPosition).normalized;
+            
+            return targetPosition + (dir * maxDistance);
+        }
     }
 }
 

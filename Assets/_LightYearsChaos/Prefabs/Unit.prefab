@@ -96,14 +96,14 @@ GameObject:
   - component: {fileID: 7369032039481685937}
   - component: {fileID: 8929330880725263289}
   - component: {fileID: 4660643772773936497}
-  - component: {fileID: 463973962115499915}
   - component: {fileID: 6997337788137559793}
   - component: {fileID: 1190615491132638771}
   - component: {fileID: 6555301731814038653}
   - component: {fileID: 2201947741691880148}
   - component: {fileID: 617875559479099927}
   - component: {fileID: 6903684211373040654}
-  - component: {fileID: 4325757634461392047}
+  - component: {fileID: 3327889253431995778}
+  - component: {fileID: 4268105831031183974}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -192,9 +192,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 240
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -203,29 +203,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &463973962115499915
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2123414927205097845}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6997337788137559793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fa8de3362c4304f8043ce5d72f742d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &4325757634461392047
+--- !u!54 &3327889253431995778
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,7 +310,30 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!136 &4268105831031183974
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123414927205097845}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2782676366643243032
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 3051040286662698373}
   - component: {fileID: 530913316759815329}
   - component: {fileID: 3838180850245280908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

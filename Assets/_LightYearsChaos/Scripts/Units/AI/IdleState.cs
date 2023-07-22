@@ -42,6 +42,10 @@ namespace LightYearsChaos
             {
                 aggroState = new AggroState(unit, stateManager, enemy);
             }
+            else
+            {
+                ((AggroState)aggroState).Target = enemy;
+            }
 
             stateManager.SetState(aggroState);
         }

@@ -8,6 +8,7 @@ namespace LightYearsChaos
     public class AggroState : UnitState
     {
         private Unit target;
+        private Coroutine attackCoroutine;
 
         public Unit Target { get { return target; } set { target = value; } }
 
