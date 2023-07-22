@@ -89,7 +89,7 @@ namespace LightYearsChaos
             skill.Setup(skillsGiven);
 
             weapon = GetComponent<WeaponComponent>();
-            weapon.Setup(weaponsGiven, skill);
+            weapon.Setup(this, weaponsGiven, skill);
 
             health = GetComponent<HealthComponent>();
             health.Setup(this);
@@ -110,15 +110,6 @@ namespace LightYearsChaos
             movement.Tick(delta);
             health.Tick(delta);
             stateManager.Tick(delta);
-        }
-
-
-        public void Attack (Unit target)
-        {
-            foreach (var weapon in Weapon.Weapons)
-            {
-                weapon.Fire(target);
-            }
         }
     }
 }

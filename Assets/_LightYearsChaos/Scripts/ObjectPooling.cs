@@ -35,6 +35,7 @@ namespace LightYearsChaos
         {
             for (int i = 0, iMax = prefabsToPool.Count; i < iMax; ++i)
             {
+                pooledObjects.Add(i, new List<GameObject>());
                 for (int j = 0; j < amountToPool; ++j)
                 {
                     var pooledObj = Instantiate(prefabsToPool[i], transform);

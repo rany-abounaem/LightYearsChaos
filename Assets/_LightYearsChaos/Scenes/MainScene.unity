@@ -322,6 +322,10 @@ PrefabInstance:
       propertyPath: teamId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8929330880725263289, guid: 5862b8e88537e3a41a4a9cc093b15459, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 253e49662a1720d4ca4713742e2994f6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -465,8 +469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63322d0ffb03f1644989f63c26c90408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountToPool: 0
-  prefabsToPool: []
+  amountToPool: 5
+  prefabsToPool:
+  - {fileID: 8251923170331656468, guid: 28e9ed0d5e649154ba4193545ba0f773, type: 3}
 --- !u!4 &1195989463
 Transform:
   m_ObjectHideFlags: 0

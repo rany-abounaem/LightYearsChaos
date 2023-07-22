@@ -25,12 +25,18 @@ namespace LightYearsChaos
         public Skill Skill { get { return skill; } set { skill = value; } }
 
 
-        public bool Fire(Unit target)
+        public virtual bool Fire(Unit self, Unit target)
         {
             if (requiresSkill)
             {
                 return false;
             }
+
+            var spear = ObjectPooling.Instance.GetPooledObject(PooledObjectType.SpearProjectile);
+            spear.SetActive(true);
+            spear.transform.position = self.transform.position;
+            var spearProj = spear.GetComponent<Projectile>();
+            spearProj.SendProjectile(target, damage, projectileSpeed);
 
             return true;
 

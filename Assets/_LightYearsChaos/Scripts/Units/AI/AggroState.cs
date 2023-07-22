@@ -22,9 +22,7 @@ namespace LightYearsChaos
         {
             base.Enter();
             unit.Movement.Rotate(target.transform.position);
-            //target.Movement.OnMovementUpdate += HandleTargetMovement;
-            //unit.Sensor.Activate();
-            //unit.Sensor.H
+            unit.Weapon.ActivateFiring(target);
         }
 
 
@@ -41,6 +39,7 @@ namespace LightYearsChaos
         public override void Exit()
         {
             base.Exit();
+            unit.Weapon.DeactivateFiring();
         }
 
 
