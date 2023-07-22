@@ -8,7 +8,6 @@ namespace LightYearsChaos
     public class AggroState : UnitState
     {
         private Unit target;
-        private Coroutine attackCoroutine;
 
         public Unit Target { get { return target; } set { target = value; } }
 
@@ -22,6 +21,8 @@ namespace LightYearsChaos
         public override void Enter()
         {
             base.Enter();
+            unit.Movement.Rotate(target.transform.position);
+            target.Movement.OnMovementUpdate += HandleTargetMovement;
         }
 
 
@@ -34,6 +35,15 @@ namespace LightYearsChaos
         public override void Exit()
         {
             base.Exit();
+        }
+
+
+        private void HandleTargetMovement(bool state)
+        {
+            if (!state)
+            {
+                unit.Movement.Rotate(target.transform.position);
+            }
         }
     }
 }

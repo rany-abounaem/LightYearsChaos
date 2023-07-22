@@ -9,25 +9,51 @@ namespace LightYearsChaos
     [Serializable]
     public class UnitSensor : MonoBehaviour
     {
-        private int teamId;
+        private Unit unit;
+        private Coroutine scanCoroutine = null;
+        private bool isActive = false;
 
         public event Action<Unit> OnEnemyDetected;
 
-        public void Setup(int teamId, float boxSize)
+        public void Setup(Unit unit)
         {
-            this.teamId = teamId;
-
-            var boxCollider = GetComponent<BoxCollider>();
-            boxCollider.size = new Vector3(boxSize, 1, boxSize);
+            this.unit = unit;
         }
 
 
-        private void OnTriggerStay(Collider other)
+        public void Activate()
         {
-            if (other.TryGetComponent(out Unit unit) && unit.TeamId != teamId)
+            isActive = true;
+            scanCoroutine = StartCoroutine(ScanForEnemies());
+        }
+
+
+        public void Deactivate()
+        {
+            isActive = false;
+            StopCoroutine(scanCoroutine);
+        }
+
+
+        private IEnumerator ScanForEnemies()
+        {
+            var wait = new WaitForSeconds(0.25f);
+
+            while(isActive)
             {
-                OnEnemyDetected?.Invoke(unit);
+                var maxActiveWeaponFiringRange = unit.Weapon.GetActiveWeaponsMaxFiringRange();
+                var colliders = Physics.OverlapBox(unit.transform.position, new Vector3(maxActiveWeaponFiringRange, 2, maxActiveWeaponFiringRange));
+                foreach (var collider in colliders)
+                {
+                    if (collider.TryGetComponent(out Unit unit) && (unit.TeamId != this.unit.TeamId))
+                    {
+                        Debug.Log("Enemy detected by unit " + this.unit.TeamId);
+                        OnEnemyDetected?.Invoke(unit);
+                    }
+                }
+                yield return wait;
             }
+            
         }
     }
 }

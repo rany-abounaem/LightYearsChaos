@@ -87,40 +87,53 @@ namespace LightYearsChaos
                 else if (hit.collider.TryGetComponent(out Unit unit) && unit.TeamId != currentSelection.TeamId)
                 {
                     var stateManager = currentSelection.StateManager;
-                    if (stateManager.CurrentState is IdleState || stateManager.CurrentState is MovementState)
+                    var chaseState = stateManager.GetExistingState<ChaseState>();
+
+                    if (chaseState == null)
                     {
-                        var closestPoint = currentSelection.Movement.GetClosestPoint(unit.transform.position, currentSelection.Weapon.MaxFiringRange);
-                        
-                        if (Vector3.Distance (currentSelection.transform.position, closestPoint) < 0.1f)
-                        {
-                            var rotationState = stateManager.GetExistingState<RotationState>();
-                            if (rotationState == null)
-                            {
-                                rotationState = new RotationState(currentSelection, stateManager, hit.transform.position);
-                            }
-                            else
-                            {
-                                ((RotationState)rotationState).Target = hit.transform.position;
-                            }
-
-                            stateManager.SetState(rotationState);
-                        }
-                        else
-                        {
-                            var movementState = stateManager.GetExistingState<MovementState>();
-                            if (movementState == null)
-                            {
-                                movementState = new MovementState(currentSelection, stateManager, closestPoint);
-                            }
-                            else
-                            {
-                                ((MovementState)movementState).Destination = closestPoint;
-                            }
-
-                            stateManager.SetState(movementState);
-                        }
-                        
+                        chaseState = new ChaseState(currentSelection, stateManager, unit);
                     }
+                    else
+                    {
+                        ((ChaseState)chaseState).Target = unit;
+                    }
+
+                    stateManager.SetState(chaseState);
+
+                    //if (stateManager.CurrentState is IdleState || stateManager.CurrentState is MovementState)
+                    //{
+                    //    var closestPoint = currentSelection.Movement.GetClosestPoint(unit.transform.position, currentSelection.Weapon.MaxFiringRange);
+                        
+                    //    if (Vector3.Distance (currentSelection.transform.position, closestPoint) < 0.1f)
+                    //    {
+                    //        var rotationState = stateManager.GetExistingState<RotationState>();
+                    //        if (rotationState == null)
+                    //        {
+                    //            rotationState = new RotationState(currentSelection, stateManager, hit.transform.position);
+                    //        }
+                    //        else
+                    //        {
+                    //            ((RotationState)rotationState).Target = hit.transform.position;
+                    //        }
+
+                    //        stateManager.SetState(rotationState);
+                    //    }
+                    //    else
+                    //    {
+                    //        var movementState = stateManager.GetExistingState<MovementState>();
+                    //        if (movementState == null)
+                    //        {
+                    //            movementState = new MovementState(currentSelection, stateManager, closestPoint);
+                    //        }
+                    //        else
+                    //        {
+                    //            ((MovementState)movementState).Destination = closestPoint;
+                    //        }
+
+                    //        stateManager.SetState(movementState);
+                    //    }
+                        
+                    //}
                 }
             }
         }

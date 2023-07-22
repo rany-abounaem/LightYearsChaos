@@ -57,14 +57,14 @@ namespace LightYearsChaos
         private WeaponComponent weapon;
         private SkillComponent skill;
         private UnitStateManager stateManager;
-        
+        private UnitSensor sensor;
+
         [SerializeField] private int teamId;
         [SerializeField] private GameObject selectionObject;
         [SerializeField] private List<Skill> skillsGiven = new List<Skill>();
         [SerializeField] private List<Weapon> weaponsGiven = new List<Weapon>();
         [SerializeField] private UnitType type;
-        [SerializeField] private UnitSensor sensor;
-
+        
         public NavMeshAgent Agent { get { return agent; } }
         public HealthComponent Health { get { return health; } }
         public MovementComponent Movement { get { return movement; } }
@@ -80,6 +80,7 @@ namespace LightYearsChaos
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
 
             movement = GetComponent<MovementComponent>();
             movement.Setup(agent);;
@@ -93,10 +94,11 @@ namespace LightYearsChaos
             health = GetComponent<HealthComponent>();
             health.Setup(this);
 
+            sensor = GetComponent<UnitSensor>();
+            sensor.Setup(this);
+
             stateManager = GetComponent<UnitStateManager>();
             stateManager.Setup(this, new IdleState(this, stateManager));
-
-            sensor.Setup(teamId, weapon.MaxFiringRange * 2);
         }
 
 

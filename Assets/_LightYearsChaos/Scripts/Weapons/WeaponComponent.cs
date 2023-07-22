@@ -29,11 +29,6 @@ namespace LightYearsChaos
 
         public void Equip(Weapon weapon)
         {
-            if (weapon.FiringRange > maxFiringRange)
-            {
-                maxFiringRange = weapon.FiringRange;
-            }
-
             if (weapon.RequiresSkill)
             {
                 var skillInstance = Instantiate(weapon.Skill);
@@ -41,6 +36,26 @@ namespace LightYearsChaos
                 skill.AddSkill(skillInstance);
             }
             weapons.Add(weapon);
+        }
+
+
+        public float GetActiveWeaponsMaxFiringRange()
+        {
+            float maxFiringRange = 0;
+
+            foreach (var weapon in weapons)
+            {
+                if (weapon.RequiresSkill && !((WeaponSkill)weapon.Skill).IsActive)
+                {
+                    continue;
+                }
+                else
+                {
+                    maxFiringRange = Mathf.Max(maxFiringRange, weapon.FiringRange);
+                }
+            }
+
+            return maxFiringRange;
         }
     }
 }
