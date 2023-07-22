@@ -16,15 +16,25 @@ namespace LightYearsChaos
             var dir = (target.transform.position - transform.position).normalized;
             rigidbody.velocity = dir * speed;
             this.damage = damage;
+            this.target = target;
+
+            StartCoroutine(SelfDestruct());
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider collider)
         {
-            if (other.TryGetComponent(out Unit unit) && unit == target)
+            if (collider.TryGetComponent(out Unit unit) && unit == target)
             {
                 target.Health.RemoveHealth(damage);
                 gameObject.SetActive(false);
             }
         }
+
+        private IEnumerator SelfDestruct()
+        {
+            yield return new WaitForSeconds(4f);
+            gameObject.SetActive(false);
+        }
+
     }
 }

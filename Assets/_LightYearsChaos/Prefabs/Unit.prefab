@@ -326,7 +326,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -394,8 +394,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBars:
-  - {fileID: 5267025703396516713}
   - {fileID: 1366853109228007031}
+  - {fileID: 5267025703396516713}
   - {fileID: 167009130108420241}
 --- !u!1 &6344314469892283522
 GameObject:

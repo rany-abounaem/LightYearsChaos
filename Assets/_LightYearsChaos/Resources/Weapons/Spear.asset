@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 201b1d0e2c9d74c46a10923e3a9f3cc7, type: 3}
   damage: 20
-  projectileSpeed: 10
+  projectileSpeed: 50
   firingRange: 5
   fireRate: 2
   requiresSkill: 0

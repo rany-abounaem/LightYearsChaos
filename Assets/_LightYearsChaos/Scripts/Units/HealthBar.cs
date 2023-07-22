@@ -45,9 +45,9 @@ namespace LightYearsChaos
         private void UpdateHealthBars(float health, float maxHealth)
         {
             var totalBarCount = healthBars.Count;
-            var currentBarCount = (int)((health / maxHealth) * totalBarCount);
+            var currentBarCount = Mathf.Ceil((health / maxHealth) * totalBarCount);
 
-            for (int i = totalBarCount - 1; i > currentBarCount; i--)
+            for (int i = totalBarCount - 1; i >= currentBarCount; i--)
             {
                 healthBars[i].color = Color.grey;
             }

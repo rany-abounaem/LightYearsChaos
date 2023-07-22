@@ -35,6 +35,9 @@ namespace LightYearsChaos
             var spear = ObjectPooling.Instance.GetPooledObject(PooledObjectType.SpearProjectile);
             spear.SetActive(true);
             spear.transform.position = self.transform.position;
+            var dir = (target.transform.position - spear.transform.position).normalized;
+            var lookRotation = Quaternion.LookRotation(dir);
+            spear.transform.rotation = lookRotation;
             var spearProj = spear.GetComponent<Projectile>();
             spearProj.SendProjectile(target, damage, projectileSpeed);
 

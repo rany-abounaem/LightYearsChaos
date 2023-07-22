@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63322d0ffb03f1644989f63c26c90408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountToPool: 5
+  amountToPool: 10
   prefabsToPool:
   - {fileID: 8251923170331656468, guid: 28e9ed0d5e649154ba4193545ba0f773, type: 3}
 --- !u!4 &1195989463
