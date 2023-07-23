@@ -17,6 +17,6 @@ MonoBehaviour:
   projectileSpeed: 50
   firingRange: 5
   fireRate: 2
-  requiresSkill: 0
+  requiresSkill: 1
   skill: {fileID: 11400000, guid: c40b336ca7c10ce40ad53ea8aa62573e, type: 2}
   projectileType: 0

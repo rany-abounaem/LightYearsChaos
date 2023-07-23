@@ -41,7 +41,7 @@ namespace LightYearsChaos
 
             while(isActive)
             {
-                var maxActiveWeaponFiringRange = unit.Weapon.GetActiveWeaponsMaxFiringRange();
+                var maxActiveWeaponFiringRange = unit.Weapon.GetActiveWeaponsMaxAttackRannge();
                 var colliders = Physics.OverlapBox(unit.transform.position, new Vector3(maxActiveWeaponFiringRange, 2, maxActiveWeaponFiringRange));
                 foreach (var collider in colliders)
                 {
@@ -57,4 +57,3 @@ namespace LightYearsChaos
         }
     }
 }
-

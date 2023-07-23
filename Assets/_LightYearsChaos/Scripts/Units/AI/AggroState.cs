@@ -22,7 +22,7 @@ namespace LightYearsChaos
         {
             base.Enter();
             unit.Movement.Rotate(target.transform.position);
-            unit.Weapon.ActivateFiring(target);
+            unit.Weapon.ActivateAttacking(target);
         }
 
 
@@ -52,4 +52,3 @@ namespace LightYearsChaos
         //}
     }
 }
-

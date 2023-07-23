@@ -19,13 +19,13 @@ namespace LightYearsChaos
 
         public float Damage { get { return damage; } }
         public float ProjectileSpeed { get { return projectileSpeed; } }
-        public float FiringRange { get { return firingRange; } }
+        public float AttackRange { get { return firingRange; } }
         public float FireRate { get { return fireRate; } }
         public bool RequiresSkill { get { return requiresSkill; } }
         public Skill Skill { get { return skill; } set { skill = value; } }
 
 
-        public virtual bool Fire(Unit self, Unit target)
+        public virtual bool Use(Unit self, Unit target)
         {
             if (requiresSkill)
             {
@@ -46,4 +46,3 @@ namespace LightYearsChaos
         }
     }
 }
-

@@ -8,15 +8,17 @@ namespace LightYearsChaos
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private CameraManager cameraManager;
+        [SerializeField] private UIManager uiManager;
 
         private InputManager input;
-        private PlayerController unitController;
+        private PlayerController playerController;
 
         private void Awake()
         {
             input = new InputManager();
-            unitController = new PlayerController(input);
+            playerController = new PlayerController(input);
             cameraManager.Setup(input);
+            uiManager.Setup(playerController);
         }
     }
 }

@@ -1,7 +1,6 @@
+using System;
 using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 
 namespace LightYearsChaos
@@ -12,6 +11,8 @@ namespace LightYearsChaos
         private Unit currentSelection;  
 
         public Unit CurrentSelection { get { return currentSelection; } }
+
+        public event Action<Unit> OnUpdateSelection;
 
 
         public PlayerController(InputManager input)
@@ -40,6 +41,7 @@ namespace LightYearsChaos
                 {
                     currentSelection = unit;
                     unit.SelectionObject.SetActive(true);
+                    OnUpdateSelection?.Invoke(currentSelection);
                 }
                 else
                 {
@@ -47,6 +49,7 @@ namespace LightYearsChaos
                     {
                         currentSelection.SelectionObject.SetActive(false);
                         currentSelection = null;
+                        OnUpdateSelection?.Invoke(currentSelection);
                     }
                     
                 }
@@ -139,4 +142,3 @@ namespace LightYearsChaos
         }
     }
 }
-

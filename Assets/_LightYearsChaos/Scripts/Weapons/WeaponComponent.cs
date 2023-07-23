@@ -10,7 +10,7 @@ namespace LightYearsChaos
         private List<Weapon> weapons = new List<Weapon>();
         private SkillComponent skill;
         private float maxFiringRange = 0;
-        private bool isFiring = false;
+        private bool isAttacking = false;
         private Unit unit;
 
         public List<Weapon> Weapons { get {  return weapons; } }
@@ -43,7 +43,7 @@ namespace LightYearsChaos
         }
 
 
-        public float GetActiveWeaponsMaxFiringRange()
+        public float GetActiveWeaponsMaxAttackRannge()
         {
             float maxFiringRange = 0;
 
@@ -55,7 +55,7 @@ namespace LightYearsChaos
                 }
                 else
                 {
-                    maxFiringRange = Mathf.Max(maxFiringRange, weapon.FiringRange);
+                    maxFiringRange = Mathf.Max(maxFiringRange, weapon.AttackRange);
                 }
             }
 
@@ -63,24 +63,24 @@ namespace LightYearsChaos
         }
 
 
-        public void ActivateFiring(Unit target)
+        public void ActivateAttacking(Unit target)
         {
-            isFiring = true;
+            isAttacking = true;
 
             foreach (var weapon in weapons)
             {
-                StartCoroutine(FiringCoroutine(weapon, target));
+                StartCoroutine(AttackinngCoroutine(weapon, target));
             }
         }
 
 
-        private IEnumerator FiringCoroutine(Weapon weapon, Unit target)
+        private IEnumerator AttackinngCoroutine(Weapon weapon, Unit target)
         {
             var wait = new WaitForSeconds(weapon.FireRate);
 
-            while (isFiring)
+            while (isAttacking)
             {
-                weapon.Fire(unit, target);
+                weapon.Use(unit, target);
                 yield return wait;
             }
         }
@@ -88,9 +88,8 @@ namespace LightYearsChaos
 
         public void DeactivateFiring()
         {
-            isFiring = false;
+            isAttacking = false;
             StopAllCoroutines();
         }
     }
 }
-
