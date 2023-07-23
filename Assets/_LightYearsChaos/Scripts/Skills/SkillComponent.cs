@@ -45,12 +45,10 @@ namespace LightYearsChaos
                 {
                     if (weaponSkill.IsActive && weaponSkill.CurrentActiveDuration < weaponSkill.MaxActiveDuration)
                     {
-                        Debug.Log("Weapon skill activate " + weaponSkill.IsActive + " for duration: " + weaponSkill.CurrentActiveDuration);
                         weaponSkill.CurrentActiveDuration += delta;
                     }
                     else if (weaponSkill.IsActive && weaponSkill.CurrentActiveDuration >= weaponSkill.MaxActiveDuration)
                     {
-                        Debug.Log("Deactivated weapon skill");
                         weaponSkill.IsActive = false;
                         weaponSkill.CurrentActiveDuration = 0;
                     }

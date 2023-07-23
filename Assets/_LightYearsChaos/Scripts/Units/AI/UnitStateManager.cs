@@ -44,7 +44,6 @@ namespace LightYearsChaos
 
         public void SetState(UnitState state)
         {
-            Debug.Log(state);
             if (!existingStates.Contains(state))
             {
                 existingStates.Add(state);

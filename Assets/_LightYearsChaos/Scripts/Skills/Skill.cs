@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
 using UnityEngine;
 
 
@@ -25,7 +24,6 @@ namespace LightYearsChaos
         {
             if (isOnCooldown)
             {
-                Debug.Log("Skill is on cooldown " + currentCooldown);
                 return false;
             }
 

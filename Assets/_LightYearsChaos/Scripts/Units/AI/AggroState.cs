@@ -24,6 +24,7 @@ namespace LightYearsChaos
             unit.Movement.Rotate(target.transform.position);
             unit.Weapon.ActivateAttacking(target);
             unit.Anim.SetBool("IsAttacking", true);
+            target.OnDeath += HandleTargetDeath;
         }
 
 
@@ -59,12 +60,14 @@ namespace LightYearsChaos
         }
 
 
-        //private void HandleTargetMovement(bool state)
-        //{
-        //    if (!state)
-        //    {
-        //        unit.Movement.Rotate(target.transform.position);
-        //    }
-        //}
+        private void HandleTargetDeath()
+        {
+            var idleState = stateManager.GetExistingState<IdleState>();
+            if (idleState == null)
+            {
+                idleState = new IdleState(unit, stateManager);
+            }
+            stateManager.SetState(idleState);
+        }
     }
 }

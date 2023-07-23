@@ -71,6 +71,7 @@ namespace LightYearsChaos
                     {
                         var unitSkill = selectedUnitSkills.Skills.ElementAt(i).Value;
                         slot.SlotSkill = unitSkill;
+                        slot.SkillImage.color = unitSkill.IsOnCooldown ? Color.grey : Color.white;
                         slot.SkillImage.sprite = unitSkill.Icon;
                     }
                 }
@@ -83,7 +84,6 @@ namespace LightYearsChaos
         {
             var slot = slots[slotIndex];
 
-            Debug.Log("Casting");
             selectedUnitSkills.CastSkill(slotIndex, target);
         }
 

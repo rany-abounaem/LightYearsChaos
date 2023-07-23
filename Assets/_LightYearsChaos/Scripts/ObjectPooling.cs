@@ -13,7 +13,7 @@ namespace LightYearsChaos
         EnchantedSpearProjectile,
         ArrowProjectile,
         CrystallBallProjectile,
-        FireArrowProjectile,
+        MagicianUnit,
         COUNT
     }
 

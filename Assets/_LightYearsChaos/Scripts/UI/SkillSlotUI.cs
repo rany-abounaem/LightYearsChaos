@@ -1,4 +1,3 @@
-using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,7 +36,6 @@ namespace LightYearsChaos
 
         private void UpdateImage(bool cooldown)
         {
-            Debug.Log("Update image");
             skillImage.color = cooldown ? Color.grey : Color.white;
         }
     }

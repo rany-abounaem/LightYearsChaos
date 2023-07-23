@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CrystalBall
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 55063303f0e77304888fa021f8336178, type: 3}
-  damage: 20
-  projectileSpeed: 50
+  damage: 15
+  projectileSpeed: 20
   attackRange: 5
   attackRate: 2
   requiresSkill: 0

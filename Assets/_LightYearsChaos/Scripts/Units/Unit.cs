@@ -78,6 +78,8 @@ namespace LightYearsChaos
         public UnitSensor Sensor { get {  return sensor; } }
         public Animator Anim { get { return anim; } }
 
+        public event Action OnDeath;
+
 
         private void Awake()
         {
@@ -87,7 +89,7 @@ namespace LightYearsChaos
             agent.updateRotation = false;
 
             movement = GetComponent<MovementComponent>();
-            movement.Setup(agent);;
+            movement.Setup(agent); ;
 
             skill = GetComponent<SkillComponent>();
             skill.Setup(this, skillsGiven);
@@ -97,12 +99,18 @@ namespace LightYearsChaos
 
             health = GetComponent<HealthComponent>();
             health.Setup(this);
+            health.OnDeath += () => { OnDeath?.Invoke(); };
 
             sensor = GetComponent<UnitSensor>();
             sensor.Setup(this);
 
             stateManager = GetComponent<UnitStateManager>();
             stateManager.Setup(this, new IdleState(this, stateManager));
+
+            OnDeath += () =>
+            {
+                gameObject.SetActive(false);
+            };
         }
 
 
