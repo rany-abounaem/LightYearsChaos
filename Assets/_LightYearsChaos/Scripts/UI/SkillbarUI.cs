@@ -53,6 +53,8 @@ namespace LightYearsChaos
                 foreach (var slot in slots)
                 {
                     slot.SkillImage.sprite = defaultSkillIcon;
+                    slot.SlotSkill = null;
+                    slot.SkillImage.color = Color.white;
                 }
             }
             else

@@ -19,7 +19,7 @@ namespace LightYearsChaos
 
         public int SlotIndex { get { return slotIndex; } }
         public Image SkillImage { get { return skillImage; } }
-        public Skill SlotSkill { get { return slotSkill; } set { if (slotSkill != null) { slotSkill.OnCooldown -= UpdateImage; }  slotSkill = value; slotSkill.OnCooldown += UpdateImage; } }
+        public Skill SlotSkill { get { return slotSkill; } set { if (slotSkill != null) { slotSkill.OnCooldown -= UpdateImage; }  slotSkill = value; if (value != null) { slotSkill.OnCooldown += UpdateImage; } } }
 
         public event Action<int> OnSlotClick;
 
