@@ -86,7 +86,7 @@ namespace LightYearsChaos
             movement.Setup(agent);;
 
             skill = GetComponent<SkillComponent>();
-            skill.Setup(skillsGiven);
+            skill.Setup(this, skillsGiven);
 
             weapon = GetComponent<WeaponComponent>();
             weapon.Setup(this, weaponsGiven, skill);

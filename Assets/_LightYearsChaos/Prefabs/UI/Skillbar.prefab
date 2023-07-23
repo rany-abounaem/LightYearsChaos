@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4a12551d5881a4db8c7567ca1930bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSkillIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   skillSlotPrefab: {fileID: 5246383611515581408, guid: e5da1b964758a0149b5c369e057e3369, type: 3}
   skillsNumber: 5
 --- !u!1 &8632894436259320626

@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2122bb24ee114434aa869af4f2c0d498, type: 3}
-  m_Name: EnchantSpear
+  m_Script: {fileID: 11500000, guid: 1b526dff531902543a7e5ce7870cfba4, type: 3}
+  m_Name: HealSkill
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: fcff08f93fc15f946a3708a411b1744e, type: 3}
+  icon: {fileID: 21300000, guid: ef18957f731488b46b5aae9361ed66d0, type: 3}
   isOnCooldown: 0
   cooldown: 20
   currentCooldown: 20
-  isActive: 0
-  maxActiveDuration: 10
-  currentActiveDuration: 0
+  healValue: 30

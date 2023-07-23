@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73754383799a0b0468d5cade10343ad4, type: 3}
-  m_Name: Spear
+  m_Name: Bow
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 201b1d0e2c9d74c46a10923e3a9f3cc7, type: 3}
-  damage: 20
-  projectileSpeed: 50
-  attackRange: 5
-  attackRate: 2
-  requiresSkill: 1
-  skill: {fileID: 11400000, guid: c40b336ca7c10ce40ad53ea8aa62573e, type: 2}
-  projectileType: 0
+  icon: {fileID: 21300000, guid: 5e2b390860c15a04790a31c3246dc3c4, type: 3}
+  damage: 10
+  projectileSpeed: 100
+  attackRange: 6
+  attackRate: 1
+  requiresSkill: 0
+  skill: {fileID: 0}
+  projectileType: 2

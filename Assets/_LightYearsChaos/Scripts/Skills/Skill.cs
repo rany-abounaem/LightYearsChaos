@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build;
@@ -13,17 +14,23 @@ namespace LightYearsChaos
         [SerializeField] private float cooldown;
         [SerializeField] private float currentCooldown;
 
+        public event Action<bool> OnCooldown;
+
         public Sprite Icon { get { return icon; } }
-        public bool IsOnCooldown { get { return isOnCooldown; } set { isOnCooldown = value; } }
+        public bool IsOnCooldown { get { return isOnCooldown; } set { isOnCooldown = value; OnCooldown?.Invoke(value); } }
         public float Cooldown { get { return cooldown; }  }
         public float CurrentCooldown { get { return currentCooldown; } set { currentCooldown = value; } }
 
-        public virtual bool Cast(Unit target = null)
+        public virtual bool Cast(Unit self, Unit target = null)
         {
             if (isOnCooldown)
             {
+                Debug.Log("Skill is on cooldown " + currentCooldown);
                 return false;
             }
+
+            IsOnCooldown = true;
+
             return true;
         }
     }

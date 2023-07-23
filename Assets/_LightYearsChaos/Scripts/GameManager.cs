@@ -18,7 +18,7 @@ namespace LightYearsChaos
             input = new InputManager();
             playerController = new PlayerController(input);
             cameraManager.Setup(input);
-            uiManager.Setup(playerController);
+            uiManager.Setup(playerController, input);
         }
     }
 }

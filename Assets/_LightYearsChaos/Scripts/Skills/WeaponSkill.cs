@@ -17,7 +17,7 @@ namespace LightYearsChaos
         public float CurrentActiveDuration { get { return currentActiveDuration; } set { currentActiveDuration = value; } }
 
 
-        public override bool Cast(Unit target = null)
+        public override bool Cast(Unit self, Unit target = null)
         {
             if (base.Cast(target))
             {

@@ -47,7 +47,6 @@ namespace LightYearsChaos
                 {
                     if (collider.TryGetComponent(out Unit unit) && (unit.TeamId != this.unit.TeamId))
                     {
-                        Debug.Log("Enemy detected by unit " + this.unit.TeamId);
                         OnEnemyDetected?.Invoke(unit);
                     }
                 }

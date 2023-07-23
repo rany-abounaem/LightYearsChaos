@@ -8,11 +8,14 @@ namespace LightYearsChaos
     public class PlayerController
     {
         private InputManager input;
-        private Unit currentSelection;  
+        private Unit currentSelection;
+        private Unit currentTarget;
 
         public Unit CurrentSelection { get { return currentSelection; } }
+        public Unit CurrentTarget { get { return currentTarget; } }
 
-        public event Action<Unit> OnUpdateSelection;
+        public event Action<Unit> OnSelectionUpdate;
+        public event Action<Unit> OnTargetUpdate;
 
 
         public PlayerController(InputManager input)
@@ -41,7 +44,7 @@ namespace LightYearsChaos
                 {
                     currentSelection = unit;
                     unit.SelectionObject.SetActive(true);
-                    OnUpdateSelection?.Invoke(currentSelection);
+                    OnSelectionUpdate?.Invoke(currentSelection);
                 }
                 else
                 {
@@ -49,7 +52,7 @@ namespace LightYearsChaos
                     {
                         currentSelection.SelectionObject.SetActive(false);
                         currentSelection = null;
-                        OnUpdateSelection?.Invoke(currentSelection);
+                        OnSelectionUpdate?.Invoke(currentSelection);
                     }
                     
                 }
@@ -74,6 +77,12 @@ namespace LightYearsChaos
             {
                 if (hit.collider.TryGetComponent(out NavMeshSurface surface))
                 {
+                    if (currentTarget != null)
+                    {
+                        currentTarget = null;
+                        OnTargetUpdate?.Invoke(null);
+                    }
+                    
                     var stateManager = currentSelection.StateManager;
                     var movementState = stateManager.GetExistingState<MovementState>();
                     if (movementState == null)
@@ -89,6 +98,9 @@ namespace LightYearsChaos
                 }
                 else if (hit.collider.TryGetComponent(out Unit unit) && unit.TeamId != currentSelection.TeamId)
                 {
+                    currentTarget = unit;
+                    OnTargetUpdate?.Invoke(unit);
+
                     var stateManager = currentSelection.StateManager;
                     var chaseState = stateManager.GetExistingState<ChaseState>();
 

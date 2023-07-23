@@ -13,6 +13,9 @@ namespace LightYearsChaos
         [SerializeField] private float maxHealth;
         [SerializeField] private HealthBar healthBar;
 
+        public float Health { get { return health; } }
+        public float MaxHealth { get { return maxHealth; } }
+
         public event Action<float, float> OnHealthUpdate;
         public event Action OnDeath;
 

@@ -9,18 +9,24 @@ namespace LightYearsChaos
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private SkillbarUI skillbarUI;
+        [SerializeField] private BottomPanelUI bottomPanelUI;
 
-        private PlayerController playerController;
+        public event Action<Unit> OnSelectionUpdate;
+        public event Action<Unit> OnTargetUpdate;
 
-        public event Action<Unit> OnUpdateSelection;
-
-        public void Setup (PlayerController playerController)
+        public void Setup (PlayerController playerController, InputManager inputManager)
         {
-            playerController.OnUpdateSelection += (unit) =>
+            playerController.OnSelectionUpdate += (unit) =>
             {
-                OnUpdateSelection?.Invoke(unit);
+                OnSelectionUpdate?.Invoke(unit);
             };
 
+            playerController.OnTargetUpdate += (unit) =>
+            {
+                OnTargetUpdate?.Invoke(unit);
+            };
+
+            bottomPanelUI.Setup(inputManager);
             skillbarUI.Setup(this);
         }
     }

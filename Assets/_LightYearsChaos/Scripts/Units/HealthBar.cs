@@ -22,6 +22,8 @@ namespace LightYearsChaos
             var camera = Camera.main.GetComponent<CameraManager>();
             camera.OnCameraUpdate += UpdateTransform;
             UpdateTransform();
+
+            UpdateHealthBars(unit.Health.Health, unit.Health.MaxHealth);
         }
 
 
@@ -45,11 +47,15 @@ namespace LightYearsChaos
         private void UpdateHealthBars(float health, float maxHealth)
         {
             var totalBarCount = healthBars.Count;
-            var currentBarCount = Mathf.Ceil((health / maxHealth) * totalBarCount);
+            var currentBarCount = (int)Mathf.Ceil((health / maxHealth) * totalBarCount);
 
-            for (int i = totalBarCount - 1; i >= currentBarCount; i--)
+            for (int i = 0; i < currentBarCount; i++)
             {
-                healthBars[i].color = Color.grey;
+                healthBars[i].color = Color.green;
+            }
+            for (int i = currentBarCount; i < totalBarCount; i++)
+            {
+                healthBars[i].color = Color.gray;
             }
         }
 

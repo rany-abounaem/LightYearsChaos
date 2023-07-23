@@ -47,6 +47,19 @@ namespace LightYearsChaos
                 OnCameraPan?.Invoke(context.ReadValue<Vector2>());
             };
         }
+
+
+        public void ToggleGameInput(bool state)
+        {
+            if (state)
+            {
+                inputControls.Game.Enable();
+            }
+            else
+            {
+                inputControls.Game.Disable();
+            }
+        }
     }
 }
 

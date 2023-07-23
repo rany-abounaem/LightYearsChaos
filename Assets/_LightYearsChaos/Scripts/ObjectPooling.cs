@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,11 @@ using UnityEngine;
 
 namespace LightYearsChaos
 {
+    [Serializable]
     public enum PooledObjectType
     {
         SpearProjectile = 0,
-        EnchantedSpearProjectile = 0,
+        EnchantedSpearProjectile,
         ArrowProjectile,
         FireArrowProjectile,
         COUNT
