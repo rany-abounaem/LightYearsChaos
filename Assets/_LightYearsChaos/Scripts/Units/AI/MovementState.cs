@@ -22,6 +22,7 @@ namespace LightYearsChaos
         {
             base.Enter();
             unit.Movement.Move(destination);
+            unit.Anim.SetBool("IsMoving", true);
             unit.Movement.OnMovementUpdate += HandleMovementUpdate;
         }
 
@@ -29,12 +30,14 @@ namespace LightYearsChaos
         public override void Update()
         {
             base.Update();
+            unit.Anim.SetFloat("Speed", unit.Agent.velocity.magnitude / unit.Agent.speed);
         }
 
 
         public override void Exit()
         {
             base.Exit();
+            unit.Anim.SetBool("IsMoving", false);
             unit.Movement.OnMovementUpdate -= HandleMovementUpdate;
         }
 

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73754383799a0b0468d5cade10343ad4, type: 3}
+  m_Name: CrystalBall
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 55063303f0e77304888fa021f8336178, type: 3}
+  damage: 20
+  projectileSpeed: 50
+  attackRange: 5
+  attackRate: 2
+  requiresSkill: 0
+  skill: {fileID: 0}
+  projectileType: 3
+  projectileOffset: {x: 0, y: 1, z: 0}

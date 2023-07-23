@@ -23,6 +23,7 @@ namespace LightYearsChaos
             base.Enter();
             unit.Movement.Rotate(target.transform.position);
             unit.Weapon.ActivateAttacking(target);
+            unit.Anim.SetBool("IsAttacking", true);
         }
 
 
@@ -33,6 +34,20 @@ namespace LightYearsChaos
             {
                 unit.Movement.Rotate(target.transform.position, true);
             }
+
+            if (Vector3.Distance(target.transform.position, unit.transform.position) > 10)
+            {
+                var chaseState = stateManager.GetExistingState<ChaseState>();
+                if (chaseState == null)
+                {
+                    chaseState = new ChaseState(unit, stateManager, target);
+                }
+                else
+                {
+                    ((ChaseState)chaseState).Target = target;
+                }
+                stateManager.SetState(chaseState);
+            }
         }
 
 
@@ -40,6 +55,7 @@ namespace LightYearsChaos
         {
             base.Exit();
             unit.Weapon.DeactivateFiring();
+            unit.Anim.SetBool("IsAttacking", false);
         }
 
 

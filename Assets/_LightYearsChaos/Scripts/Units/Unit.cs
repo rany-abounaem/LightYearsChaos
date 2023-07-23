@@ -58,6 +58,7 @@ namespace LightYearsChaos
         private SkillComponent skill;
         private UnitStateManager stateManager;
         private UnitSensor sensor;
+        private Animator anim;
 
         [SerializeField] private int teamId;
         [SerializeField] private GameObject selectionObject;
@@ -75,10 +76,13 @@ namespace LightYearsChaos
         public UnitType Type { get { return type; } }
         public UnitStateManager StateManager { get { return stateManager; } }
         public UnitSensor Sensor { get {  return sensor; } }
+        public Animator Anim { get { return anim; } }
 
 
         private void Awake()
         {
+            anim = GetComponent<Animator>();
+
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
 

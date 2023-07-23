@@ -22,6 +22,7 @@ namespace LightYearsChaos
         {
             base.Enter();
             unit.Movement.Move(target.transform.position);
+            unit.Anim.SetBool("IsMoving", true);
             unit.Movement.OnMovementUpdate += HandleMovementUpdate;
             unit.Sensor.Activate();
             unit.Sensor.OnEnemyDetected += HandleEnemyDetected;
@@ -31,14 +32,16 @@ namespace LightYearsChaos
         public override void Update()
         {
             base.Update();
+            unit.Anim.SetFloat("Speed", unit.Agent.velocity.magnitude / unit.Agent.speed);
         }
 
 
         public override void Exit()
         {
             base.Exit();
-            unit.Agent.SetDestination(unit.transform.position);
             unit.Movement.OnMovementUpdate -= HandleMovementUpdate;
+            unit.Agent.isStopped = true;
+            unit.Anim.SetBool("IsMoving", false);
             unit.Sensor.Deactivate();
             unit.Sensor.OnEnemyDetected -= HandleEnemyDetected;
         }
@@ -48,7 +51,7 @@ namespace LightYearsChaos
         {
             if (!state)
             {
-                unit.Movement.Move(unit.transform.position);
+                unit.Movement.Move(target.transform.position);
             }
         }
 

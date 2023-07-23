@@ -12,6 +12,7 @@ namespace LightYearsChaos
         SpearProjectile = 0,
         EnchantedSpearProjectile,
         ArrowProjectile,
+        CrystallBallProjectile,
         FireArrowProjectile,
         COUNT
     }

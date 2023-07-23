@@ -7,13 +7,15 @@ namespace LightYearsChaos
 {
     public class Projectile : MonoBehaviour
     {
+        [SerializeField] private Vector3 targetOffset;
+
         private float damage;
         private Unit target;
 
         public void SendProjectile(Unit target, float damage, float speed)
         {
             Rigidbody rigidbody = GetComponent<Rigidbody>();
-            var dir = (target.transform.position - transform.position).normalized;
+            var dir = ((target.transform.position + targetOffset) - transform.position).normalized;
             rigidbody.velocity = dir * speed;
             this.damage = damage;
             this.target = target;

@@ -16,6 +16,7 @@ namespace LightYearsChaos
         [SerializeField] private bool requiresSkill = false;
         [SerializeField] private WeaponSkill skill = null;
         [SerializeField] private PooledObjectType projectileType;
+        [SerializeField] private Vector3 projectileOffset;
 
         public float Damage { get { return damage; } }
         public float ProjectileSpeed { get { return projectileSpeed; } }
@@ -34,7 +35,7 @@ namespace LightYearsChaos
 
             var pooledObject = ObjectPooling.Instance.GetPooledObject(projectileType);
             pooledObject.SetActive(true);
-            pooledObject.transform.position = self.transform.position;
+            pooledObject.transform.position = self.transform.position + projectileOffset;
             var dir = (target.transform.position - pooledObject.transform.position).normalized;
             var lookRotation = Quaternion.LookRotation(dir);
             pooledObject.transform.rotation = lookRotation;

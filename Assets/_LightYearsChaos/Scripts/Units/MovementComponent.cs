@@ -34,6 +34,7 @@ namespace LightYearsChaos
             if (isMoving && !agent.hasPath)
             {
                 isMoving = false;
+                agent.isStopped = true;
                 OnMovementUpdate?.Invoke(false);
             }
 
@@ -57,7 +58,7 @@ namespace LightYearsChaos
 
             OnMovementUpdate?.Invoke(true);
             isMoving = true;
-
+            agent.isStopped = false;
             agent.SetDestination(destination);
         }
 
